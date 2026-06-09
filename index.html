@@ -1052,15 +1052,26 @@ setInterval(updateCountdown, 1000);
    Replace audio.src with your MP3 URL.
 ════════════════════════════════════════════════════════ */
 const musicBtn = document.getElementById('musicBtn');
-const audio    = new Audio();
-audio.src = 'https://github.com/Marion-Jay-Amian/azriel-baptism/blob/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3';
-audio.loop   = true;
+const audio = new Audio('https://github.com/Marion-Jay-Amian/azriel-baptism/raw/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3');
+audio.loop = true;
 audio.volume = 0.25;
+
 let musicPlaying = false;
 
-musicBtn.addEventListener('click', () => {
-  if (musicPlaying) { audio.pause(); musicBtn.classList.remove('playing'); musicPlaying=false; }
-  else { audio.play().catch(()=>{}); musicBtn.classList.add('playing'); musicPlaying=true; }
+musicBtn.addEventListener('click', async () => {
+  try {
+    if (musicPlaying) {
+      audio.pause();
+      musicBtn.classList.remove('playing');
+      musicPlaying = false;
+    } else {
+      await audio.play();
+      musicBtn.classList.add('playing');
+      musicPlaying = true;
+    }
+  } catch (err) {
+    console.error('Audio failed to play:', err);
+  }
 });
 
 </script>
