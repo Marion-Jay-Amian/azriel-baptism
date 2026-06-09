@@ -833,7 +833,7 @@ function goToSlide(idx, mode) {
   thumbs[currentSlide].classList.add('active');
 
   // Scroll thumbnail into view
-  thumbs[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  //thumbs[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
   // Update counter
   counterEl.textContent = (currentSlide + 1) + ' / ' + PHOTOS.length;
