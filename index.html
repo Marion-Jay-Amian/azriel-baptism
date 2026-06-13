@@ -620,10 +620,7 @@
 
   </div><!-- /card -->
 
-  <div class="scroll-hint">
-    <span>View Photos</span>
-    <div class="scroll-arrow"></div>
-  </div>
+  
 </section>
 
 
@@ -934,8 +931,8 @@ document.addEventListener('keydown', e => {
    initials: 2-letter abbreviation shown in the avatar circle.
 ════════════════════════════════════════════════════════ */
 const GODFATHERS = [
-  { name: "Juan dela Cruz",      initials: "JD" },
-  { name: "Roberto Santos",      initials: "RS" },
+  { name: "Ninong Jemy 5k bibigay",      initials: "JE" },
+  { name: "Tito Ninong Jay",      initials: "JAY" },
   { name: "Eduardo Reyes",       initials: "ER" },
   { name: "Michael Fernandez",   initials: "MF" },
   { name: "Antonio Garcia",      initials: "AG" },
@@ -1058,15 +1055,26 @@ setInterval(updateCountdown, 1000);
    Replace audio.src with your MP3 URL.
 ════════════════════════════════════════════════════════ */
 const musicBtn = document.getElementById('musicBtn');
-const audio    = new Audio();
-audio.src    = 'https://github.com/Marion-Jay-Amian/azriel-baptism/blob/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3';
-audio.loop   = true;
+const audio = new Audio('https://github.com/Marion-Jay-Amian/azriel-baptism/raw/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3');
+audio.loop = true;
 audio.volume = 0.25;
+
 let musicPlaying = false;
 
-musicBtn.addEventListener('click', () => {
-  if (musicPlaying) { audio.pause(); musicBtn.classList.remove('playing'); musicPlaying=false; }
-  else { audio.play().catch(()=>{}); musicBtn.classList.add('playing'); musicPlaying=true; }
+musicBtn.addEventListener('click', async () => {
+  try {
+    if (musicPlaying) {
+      audio.pause();
+      musicBtn.classList.remove('playing');
+      musicPlaying = false;
+    } else {
+      await audio.play();
+      musicBtn.classList.add('playing');
+      musicPlaying = true;
+    }
+  } catch (err) {
+    console.error('Audio failed to play:', err);
+  }
 });
 
 </script>
