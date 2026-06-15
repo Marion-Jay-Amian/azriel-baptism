@@ -1026,50 +1026,17 @@ setInterval(updateCountdown, 1000);
 })();
 
 
-/* ═══════════════════════════════════════════════════════
-   BACKGROUND MUSIC — AUTOPLAY + PAUSE BUTTON
-═════════════════════════════════════════════════════════ */
-
+/* ════════════════════════════════════════════════════════
+   EDIT 14 — BACKGROUND MUSIC
+   Replace audio.src with your MP3 URL.
+════════════════════════════════════════════════════════ */
 const musicBtn = document.getElementById('musicBtn');
-
-const audio = new Audio(
-  'https://github.com/Marion-Jay-Amian/azriel-baptism/raw/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3'
-);
-
+const audio = new Audio('https://github.com/Marion-Jay-Amian/azriel-baptism/raw/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3');
 audio.loop = true;
 audio.volume = 0.25;
 
 let musicPlaying = false;
 
-/* AUTO PLAY WHEN PAGE LOADS */
-window.addEventListener('load', async () => {
-  try {
-    await audio.play();
-    musicPlaying = true;
-    musicBtn.classList.add('playing');
-  } catch (err) {
-    console.log('Autoplay blocked by browser:', err);
-
-    /* Browser blocked autoplay until user interaction */
-    document.body.addEventListener(
-      'click',
-      async () => {
-        if (!musicPlaying) {
-          try {
-            await audio.play();
-            musicPlaying = true;
-            musicBtn.classList.add('playing');
-          } catch (e) {
-            console.log(e);
-          }
-        }
-      },
-      { once: true }
-    );
-  }
-});
-
-/* PLAY / PAUSE BUTTON */
 musicBtn.addEventListener('click', async () => {
   try {
     if (musicPlaying) {
@@ -1084,7 +1051,6 @@ musicBtn.addEventListener('click', async () => {
   } catch (err) {
     console.error('Audio failed to play:', err);
   }
-});
 });
 
 </script>
