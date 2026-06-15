@@ -554,7 +554,7 @@
     <!-- EDIT 3: Date -->
     <div class="detail-block">
       <div class="detail-label">Date &amp; Time</div>
-      <div class="detail-value">Sunday, the 19th of July, 2026</div>
+      <div class="detail-value">Wednesday, the 15th of July, 2026</div>
       <div class="detail-sub">10:00 in the Morning</div>
     </div>
 
@@ -568,7 +568,7 @@
     <!-- EDIT 5: Venue -->
     <div class="detail-block">
       <div class="detail-label">Reception Venue</div>
-      <div class="detail-value">Espiritu Compound</div>
+      <div class="detail-value">Espiritu Compound (Manggahan Street)</div>
       <div class="detail-sub">Purok 5 Parel Botolan Zambales</div>
     </div>
 
@@ -1026,17 +1026,50 @@ setInterval(updateCountdown, 1000);
 })();
 
 
-/* ════════════════════════════════════════════════════════
-   EDIT 14 — BACKGROUND MUSIC
-   Replace audio.src with your MP3 URL.
-════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   BACKGROUND MUSIC — AUTOPLAY + PAUSE BUTTON
+═════════════════════════════════════════════════════════ */
+
 const musicBtn = document.getElementById('musicBtn');
-const audio = new Audio('https://github.com/Marion-Jay-Amian/azriel-baptism/raw/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3');
+
+const audio = new Audio(
+  'https://github.com/Marion-Jay-Amian/azriel-baptism/raw/main/music/Welcome%20to%20the%20World%20%20Cinematic%20Christening%20Song%20%20AIlove.mp3'
+);
+
 audio.loop = true;
 audio.volume = 0.25;
 
 let musicPlaying = false;
 
+/* AUTO PLAY WHEN PAGE LOADS */
+window.addEventListener('load', async () => {
+  try {
+    await audio.play();
+    musicPlaying = true;
+    musicBtn.classList.add('playing');
+  } catch (err) {
+    console.log('Autoplay blocked by browser:', err);
+
+    /* Browser blocked autoplay until user interaction */
+    document.body.addEventListener(
+      'click',
+      async () => {
+        if (!musicPlaying) {
+          try {
+            await audio.play();
+            musicPlaying = true;
+            musicBtn.classList.add('playing');
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      },
+      { once: true }
+    );
+  }
+});
+
+/* PLAY / PAUSE BUTTON */
 musicBtn.addEventListener('click', async () => {
   try {
     if (musicPlaying) {
@@ -1051,6 +1084,7 @@ musicBtn.addEventListener('click', async () => {
   } catch (err) {
     console.error('Audio failed to play:', err);
   }
+});
 });
 
 </script>
